@@ -1,0 +1,7 @@
+SIGN UP TEST
+role: customer 
+ first name: John 
+ last name: Doe 
+ email : user2001@mailinator.com 
+ password: P@ssword1 
+ ------------------------ 
