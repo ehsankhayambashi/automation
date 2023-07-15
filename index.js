@@ -1,1 +1,2 @@
-require("./routes/signUp");
+//require("./routes/signUp");
+require("./routes/logIn");

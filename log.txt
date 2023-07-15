@@ -1,0 +1,5 @@
+Log In TEST
+ email : qauser2009@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
