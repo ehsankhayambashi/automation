@@ -1,24 +1,44 @@
 const { Builder, Capabilities, Key, By } = require("selenium-webdriver");
 const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
+const webdriver = require("selenium-webdriver");
+const axios = require("axios");
 const chromeOptions = new chrome.Options();
 
 let log = "";
-const filePath = "log.txt";
+let result = "";
+let verifyToken = null;
 
 const radioValue = "customer";
 const firstName = "John";
 const lastName = "Doe";
-const email = "user2001@mailinator.com";
+const email = "qauser2010@mailinator.com";
 const password = "P@ssword1";
+const url = "https://app.lawvo.com/sign-up";
+const SUCCESSFULURL = `https://app.lawvo.com/thank-you/${email}`;
+async function fetchUserData(email) {
+  try {
+    const response = await axios.get("https://api.lawvo.com/users", {
+      params: {
+        email: email,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 async function signUpCustomer() {
   try {
+    //---------START create web driver--------------//
     let driver = await new Builder()
       .forBrowser("chrome")
       .setChromeOptions(chromeOptions)
       .build();
-    await driver.get("https://app.lawvo.com/sign-up");
+    //---------END--------------//
+    await driver.get(url);
+    //---------START get elements--------------//
     const radio = await driver.findElement(
       By.xpath(`//input[@type='radio' and @value='${radioValue}']`)
     );
@@ -38,24 +58,67 @@ async function signUpCustomer() {
     const submitButton = await driver.findElement(
       By.xpath("//button[@type='submit']")
     );
-    const error = await driver.findElement({ id: "register_email_help" });
+    //---------END--------------//
+
+    //---------START fill from--------------//
     await radio.click();
     await firstNameInput.sendKeys(firstName);
     await lastNameInput.sendKeys(lastName);
     await emailInput.sendKeys(email);
     await passwordInput.sendKeys(password);
     await confirmPasswordInput.sendKeys(password);
-
     await submitButton.click();
+    //---------END--------------//
 
-    console.log("error", error);
-    log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: \n------------------------ \n`;
+    //---------START check data entry--------------//
+    await driver
+      .wait(webdriver.until.urlIs(SUCCESSFULURL), 9000)
+      .then((isSuccess) => {
+        if (isSuccess) {
+          result = "SUCCESSFUL";
+        } else {
+          result = "FAILED";
+        }
+      })
+      .catch((error) => {
+        result = "FAILED " + "An error occurred:" + error;
+      });
+    const currentURL = await driver.getCurrentUrl();
+    currentURL == url ? (result = "FAILED") : (result = "SUCCESSFUL");
+    //---------END--------------//
+
+    //---------START if submition was successful get verify token--------------//
+    if (result == "SUCCESSFUL") {
+      const user = await fetchUserData(email);
+      verifyToken = user.data[0].verifyToken;
+    } else {
+      result = "FAILED";
+    }
+    //---------END--------------//
+
+    //---------START if token exist verify user--------------//
+    if (verifyToken) {
+      await driver.get(`https://app.lawvo.com/verify-account/${verifyToken}`);
+    } else {
+      result = "FAILED";
+    }
+    //---------END--------------//
+
+    //---------START final check sign up--------------//
+    const verifiedUser = await fetchUserData(email);
+    const state = verifiedUser.data[0].isVerified;
+    state ? (result = "SUCCESSFUL") : (result = "FAILED");
+    //---------END--------------//
+
+    //---------START write to log file--------------//
+    log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
     try {
       fs.appendFileSync("log.txt", log);
       console.log("File has been saved.");
     } catch (error) {
       console.error(err);
     }
+    //---------END--------------//
   } finally {
     await driver.quit();
   }
