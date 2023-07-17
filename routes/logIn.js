@@ -6,15 +6,16 @@ const chromeOptions = new chrome.Options();
 
 const url = "https://app.lawvo.com/sign-in";
 const SUCCESSFULURL = `https://app.lawvo.com/dashboard`;
-const email = "qauser2009@mailinator.com";
-const password = "P@ssword1";
+// const email = "qauser2009@mailinator.com";
+// const password = "P@ssword1";
 
 let result = "";
 
-async function logIn() {
+async function logIn(email, password) {
+  let driver;
   try {
     //---------START create web driver--------------//
-    let driver = await new Builder()
+    driver = await new Builder()
       .forBrowser("chrome")
       .setChromeOptions(chromeOptions)
       .build();
@@ -56,16 +57,23 @@ async function logIn() {
     //---------END--------------//
 
     //---------START write to log file--------------//
-    log = `Log In TEST\n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
+    // log = `Log In TEST\n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
+    log = {
+      test: "log in",
+      email: email,
+      password: password,
+      result: result,
+    };
+    const jsonString = JSON.stringify(log, null, 2) + "\n";
     try {
-      fs.appendFileSync("log.txt", log);
+      fs.appendFileSync("log.txt", jsonString);
       console.log("File has been saved.");
     } catch (error) {
       console.error(err);
     }
     //---------END--------------//
   } finally {
-    await driver.quit();
+    // await driver.quit();
   }
 }
-logIn();
+module.exports = logIn;

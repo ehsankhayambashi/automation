@@ -12,10 +12,10 @@ let verifyToken = null;
 const radioValue = "customer";
 const firstName = "John";
 const lastName = "Doe";
-const email = "qauser2010@mailinator.com";
-const password = "P@ssword1";
+// const email = "qauser2010@mailinator.com";
+// const password = "P@ssword1";
 const url = "https://app.lawvo.com/sign-up";
-const SUCCESSFULURL = `https://app.lawvo.com/thank-you/${email}`;
+
 async function fetchUserData(email) {
   try {
     const response = await axios.get("https://api.lawvo.com/users", {
@@ -29,10 +29,12 @@ async function fetchUserData(email) {
   }
 }
 
-async function signUpCustomer() {
+async function signUpCustomer(email, password) {
+  let driver;
+  const SUCCESSFULURL = `https://app.lawvo.com/thank-you/${email}`;
   try {
     //---------START create web driver--------------//
-    let driver = await new Builder()
+    driver = await new Builder()
       .forBrowser("chrome")
       .setChromeOptions(chromeOptions)
       .build();
@@ -111,10 +113,18 @@ async function signUpCustomer() {
     //---------END--------------//
 
     //---------START write to log file--------------//
-    log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
+    // log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
+    log = {
+      test: "sign up",
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      result: result,
+    };
+    const jsonString = JSON.stringify(log) + "\n\n";
     try {
-      fs.appendFileSync("log.txt", log);
-      console.log("File has been saved.");
+      fs.appendFileSync("log.txt", jsonString);
     } catch (error) {
       console.error(err);
     }
@@ -122,6 +132,9 @@ async function signUpCustomer() {
   } finally {
     await driver.quit();
   }
+  // RETURN USER AND PASSWORD
+  return { email, password, result };
 }
 
-signUpCustomer();
+// signUpCustomer();
+module.exports = signUpCustomer;

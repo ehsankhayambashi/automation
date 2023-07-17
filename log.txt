@@ -3,3 +3,213 @@ Log In TEST
  password: P@ssword1 
  RESULT: SUCCESSFUL
 ------------------------ 
+Log In TEST
+ email : qauser2009@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2011@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2010@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2011@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2012@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2012@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+Log In TEST
+ email : qauser2012@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2013@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+Log In TEST
+ email : qauser2013@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+SIGN UP TEST
+ role: customer 
+ first name: John 
+ last name: Doe 
+ email : qauser2014@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+Log In TEST
+ email : qauser2014@mailinator.com 
+ password: P@ssword1 
+ RESULT: SUCCESSFUL
+------------------------ 
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2014@mailinator.com","password":"P@ssword1","result":"SUCCESSFUL"}{
+  "test": "sign up",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "qauser2014@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
+"\n[object Object]"
+{
+  "test": "log in",
+  "email": "qauser2014@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
+"\n[object Object]"
+{
+  "test": "log in",
+  "email": "qauser2014@mailinator.com",
+  "password": "P@ssword1",
+  "result": "FAILED"
+}
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2014@mailinator.com","password":"P@ssword1","result":"SUCCESSFUL"}
+
+{
+  "test": "log in",
+  "email": "qauser2014@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2014@mailinator.com","password":"P@ssword1","result":"SUCCESSFUL"}
+
+{
+  "test": "log in",
+  "email": "qauser2014@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
