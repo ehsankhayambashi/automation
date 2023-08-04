@@ -9,7 +9,8 @@
   "author": "ehsan khayam bashi",
   "license": "ISC",
   "dependencies": {
-    "chromedriver": "^114.0.2",
-    "selenium-webdriver": "^4.10.0"
+    "chromedriver": "^114.0.3",
+    "selenium-webdriver": "^4.10.0",
+    "webdriver-manager": "^12.1.9"
   }
 }

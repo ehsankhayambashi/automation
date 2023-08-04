@@ -1,3 +1,3 @@
-//require("./routes/signUp");
-//require("./routes/logIn");
-require("./routes/signUpLogIn");
+// require("./routes/AuthCustomer/signUp");
+// require("./routes/AuthCustomer/logIn");
+require("./routes/AuthCustomer/signUpLogIn");
