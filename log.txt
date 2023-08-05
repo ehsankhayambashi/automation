@@ -227,3 +227,5 @@ Log In TEST
 
 {"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2016@mailinator.com","password":"P@ssword1","result":"FAILED"}
 
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2016@mailinator.com","password":"P@ssword1","result":"FAILED"}
+

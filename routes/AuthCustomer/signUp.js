@@ -14,30 +14,31 @@ const firstName = "John";
 const lastName = "Doe";
 // const email = "qauser2010@mailinator.com";
 // const password = "P@ssword1";
-const url = "https://app.lawvo.com/sign-up";
+const url = "https://staging.lawvo.com/sign-up ";
 
 async function fetchUserData(email) {
   try {
-    const response = await axios.get("https://api.lawvo.com/users", {
+    const response = await axios.get("https://stagingapi.lawvo.com/", {
       params: {
         email: email,
       },
     });
+    console.log("response", response.data);
     return response.data;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 }
 
 async function signUpCustomer(email, password) {
   let driver;
-  const SUCCESSFULURL = `https://app.lawvo.com/thank-you/${email}`;
+  const SUCCESSFULURL = `https://staging.lawvo.com/thank-you/${email}`;
+  //---------START create web driver--------------//
+  driver = await new Builder()
+    .forBrowser("chrome")
+    .setChromeOptions(chromeOptions)
+    .build();
   try {
-    //---------START create web driver--------------//
-    driver = await new Builder()
-      .forBrowser("chrome")
-      .setChromeOptions(chromeOptions)
-      .build();
     //---------END--------------//
     await driver.get(url);
     //---------START get elements--------------//
@@ -100,7 +101,9 @@ async function signUpCustomer(email, password) {
 
     //---------START if token exist verify user--------------//
     if (verifyToken) {
-      await driver.get(`https://app.lawvo.com/verify-account/${verifyToken}`);
+      await driver.get(
+        `https://staging.lawvo.com/verify-account/${verifyToken}`
+      );
     } else {
       result = "FAILED";
     }
@@ -126,11 +129,11 @@ async function signUpCustomer(email, password) {
     try {
       fs.appendFileSync("log.txt", jsonString);
     } catch (error) {
-      console.error(err);
+      // console.error(err);
     }
     //---------END--------------//
   } finally {
-    await driver.quit();
+    // await driver.quit();
   }
   // RETURN USER AND PASSWORD
   return { email, password, result };

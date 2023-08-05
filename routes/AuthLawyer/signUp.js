@@ -92,6 +92,7 @@ async function signUpCustomer(email, password) {
     //---------START if submition was successful get verify token--------------//
     if (result == "SUCCESSFUL") {
       const user = await fetchUserData(email);
+      console.log("user", user);
       verifyToken = user.data[0].verifyToken;
     } else {
       result = "FAILED";
