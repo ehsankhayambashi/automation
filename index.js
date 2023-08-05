@@ -1,3 +1,4 @@
+require("dotenv").config();
 // require("./routes/AuthCustomer/signUp");
 // require("./routes/AuthCustomer/logIn");
 

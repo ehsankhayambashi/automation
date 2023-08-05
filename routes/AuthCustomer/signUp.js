@@ -3,6 +3,7 @@ const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
 const axios = require("axios");
+const { decodeData } = require("../../utils/hashHelper");
 const chromeOptions = new chrome.Options();
 
 let log = "";
@@ -18,13 +19,15 @@ const url = "https://staging.lawvo.com/sign-up ";
 
 async function fetchUserData(email) {
   try {
-    const response = await axios.get("https://stagingapi.lawvo.com/", {
+    const response = await axios.get("https://stagingapi.lawvo.com/users", {
       params: {
         email: email,
       },
     });
-    console.log("response", response.data);
-    return response.data;
+    console.log("response", response.data.data);
+    const data = decodeData(response.data.data);
+    console.log("new data", data);
+    return data;
   } catch (error) {
     // console.error(error);
   }
