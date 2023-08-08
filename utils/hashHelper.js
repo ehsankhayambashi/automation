@@ -5,7 +5,7 @@ const CryptoJS = require("crypto-js");
 
 // import { HOOK_SECRET_KEY } from "../configs/env-vars";
 // const HOOK_SECRET_KEY = "DiGiSecrect@key2023";
-const HOOK_SECRET_KEY = process.env.REACT_APP_HOOK_SECRET_KEY;
+const HOOK_SECRET_KEY = process.env.HOOK_SECRET_KEY;
 const codeData = (data) => {
   // const encryptedText = Buffer.from(HOOK_SECRET_KEY, 'hex').toString();
   // const decryptedText = customDecrypt(encryptedText);

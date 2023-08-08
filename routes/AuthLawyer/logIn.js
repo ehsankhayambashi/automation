@@ -4,23 +4,20 @@ const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
 const chromeOptions = new chrome.Options();
 
-const url = "https://app.lawvo.com/sign-in";
-const SUCCESSFULURL = `https://app.lawvo.com/dashboard`;
-// const email = "qauser2009@mailinator.com";
-// const password = "P@ssword1";
+const url = `${process.env.FRONT_URL}/sign-in`;
+const SUCCESSFULURL = `${process.env.FRONT_URL}/dashboard`;
 
 let result = "";
 
 async function logIn(email, password) {
   let driver;
+  //---------START create web driver--------------//
+  driver = await new Builder()
+    .forBrowser("chrome")
+    .setChromeOptions(chromeOptions)
+    .build();
+  //---------END--------------//
   try {
-    //---------START create web driver--------------//
-    driver = await new Builder()
-      .forBrowser("chrome")
-      .setChromeOptions(chromeOptions)
-      .build();
-    //---------END--------------//
-
     //---------START open url--------------//
     await driver.get(url);
     //---------END--------------//

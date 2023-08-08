@@ -15,11 +15,13 @@ const firstName = "John";
 const lastName = "Doe";
 // const email = "qauser2010@mailinator.com";
 // const password = "P@ssword1";
-const url = "https://staging.lawvo.com/sign-up ";
+// const url = "https://staging.lawvo.com/sign-up ";
+const url = `${process.env.FRONT_URL}/sign-up`;
 
 async function fetchUserData(email) {
   try {
-    const response = await axios.get("https://stagingapi.lawvo.com/users", {
+    // const response = await axios.get("https://stagingapi.lawvo.com/users", {
+    const response = await axios.get(`${process.env.Back_URL}/users`, {
       params: {
         email: email,
       },
@@ -32,15 +34,18 @@ async function fetchUserData(email) {
     // console.error(error);
   }
 }
-
-async function signUpCustomer(email, password) {
-  let driver;
-  const SUCCESSFULURL = `https://staging.lawvo.com/thank-you/${email}`;
-  //---------START create web driver--------------//
-  driver = await new Builder()
+async function setupWebDriver() {
+  const driver = await new Builder()
     .forBrowser("chrome")
     .setChromeOptions(chromeOptions)
     .build();
+  return driver;
+}
+async function signUpCustomer(email, password) {
+  let driver;
+  const SUCCESSFULURL = `${process.env.FRONT_URL}/thank-you/${email}`;
+  //---------START create web driver--------------//
+  driver = await setupWebDriver();
   try {
     //---------END--------------//
     await driver.get(url);
@@ -96,28 +101,33 @@ async function signUpCustomer(email, password) {
     //---------START if submition was successful get verify token--------------//
     if (result == "SUCCESSFUL") {
       const user = await fetchUserData(email);
-      verifyToken = user.data[0].verifyToken;
+      console.log("USER verify token", user[0].verifyToken);
+      verifyToken = user[0].verifyToken;
     } else {
       result = "FAILED";
     }
     //---------END--------------//
 
     //---------START if token exist verify user--------------//
+    console.log("verifyToken", verifyToken);
     if (verifyToken) {
       await driver.get(
-        `https://staging.lawvo.com/verify-account/${verifyToken}`
+        `${process.env.FRONT_URL}/verify-account/${verifyToken}`
       );
     } else {
-      result = "FAILED";
+      // result = "FAILED";
     }
     //---------END--------------//
 
     //---------START final check sign up--------------//
-    const verifiedUser = await fetchUserData(email);
-    const state = verifiedUser.data[0].isVerified;
-    state ? (result = "SUCCESSFUL") : (result = "FAILED");
+    if (result == "SUCCESSFUL") {
+      const verifiedUser = await fetchUserData(email);
+      console.log("verifiedUser TOKEN", verifiedUser[0].isVerified);
+      const state = verifiedUser[0].isVerified;
+      state ? (result = "SUCCESSFUL") : (result = "FAILED");
+    }
     //---------END--------------//
-
+    console.log("STATE", result);
     //---------START write to log file--------------//
     // log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
     log = {
@@ -136,7 +146,7 @@ async function signUpCustomer(email, password) {
     }
     //---------END--------------//
   } finally {
-    // await driver.quit();
+    await driver.quit();
   }
   // RETURN USER AND PASSWORD
   return { email, password, result };

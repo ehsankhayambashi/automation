@@ -13,9 +13,9 @@ async function signUpLogin() {
       signUpEmail,
       signUpPassword
     );
-    // if (result == "SUCCESSFUL") {
-    //   await logIn(email, password);
-    // }
+    if (result == "SUCCESSFUL") {
+      await logIn(email, password);
+    }
   } catch (error) {
     // console.log(error);
   }
