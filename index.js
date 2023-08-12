@@ -6,6 +6,10 @@ require("dotenv").config();
 // require("./routes/AuthCustomer/signUpLogIn");
 
 // signup and login lawyer
-require("./routes/AuthLawyer/signUpLogIn");
+// require("./routes/AuthLawyer/signUpLogIn");
+
 // forgot password
 // require("./routes/ForgotPassword/forgotPassword");
+
+// buy a wills case as guest
+require("./routes/cases/guest/wills");

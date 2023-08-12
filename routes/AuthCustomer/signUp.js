@@ -1,9 +1,11 @@
-const { Builder, Capabilities, Key, By } = require("selenium-webdriver");
+const { Builder, By } = require("selenium-webdriver");
+const { Options } = require("selenium-webdriver/chrome");
 const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
 const axios = require("axios");
 const { decodeData } = require("../../utils/hashHelper");
+const { setupWebDriver } = require("../../utils/utils");
 const chromeOptions = new chrome.Options();
 
 let log = "";
@@ -34,13 +36,15 @@ async function fetchUserData(email) {
     // console.error(error);
   }
 }
-async function setupWebDriver() {
-  const driver = await new Builder()
-    .forBrowser("chrome")
-    .setChromeOptions(chromeOptions)
-    .build();
-  return driver;
-}
+// async function setupWebDriver() {
+//   let builder = new Builder().forBrowser("chrome");
+//   let options = new Options();
+//   options.headless(); // run headless Chrome
+//   options.excludeSwitches(["enable-logging"]); // disable 'DevTools listening on...'
+//   options.addArguments(["--no-sandbox"]); // not an advised flag but eliminates "DevToolsActivePort file doesn't exist" error.
+//   let driver = await builder.setChromeOptions(options).build();
+//   return driver;
+// }
 async function signUpCustomer(email, password) {
   let driver;
   const SUCCESSFULURL = `${process.env.FRONT_URL}/thank-you/${email}`;

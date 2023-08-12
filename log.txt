@@ -24,3 +24,21 @@
   "password": "P@ssword1",
   "result": "SUCCESSFUL"
 }
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qa-df9b3c60@mailinator.com","password":"P@ssword1","result":"SUCCESSFUL"}
+
+{
+  "test": "log in",
+  "email": "qa-df9b3c60@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qa-837416a0@mailinator.com","password":"P@ssword1","result":"SUCCESSFUL"}
+
+{
+  "test": "log in",
+  "email": "qa-837416a0@mailinator.com",
+  "password": "P@ssword1",
+  "result": "SUCCESSFUL"
+}
+{"test":"sign up","firstName":"John","lastName":"Doe","email":"qauser2023@mailinator.com","password":"P@ssword1","result":"FAILED"}
+

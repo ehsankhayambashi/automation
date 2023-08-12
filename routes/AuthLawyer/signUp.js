@@ -4,6 +4,7 @@ const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
 const axios = require("axios");
 const { decodeData } = require("../../utils/hashHelper");
+const { setupWebDriver } = require("../../utils/utils");
 const chromeOptions = new chrome.Options();
 
 let log = "";
@@ -34,13 +35,13 @@ async function fetchUserData(email) {
     // console.error(error);
   }
 }
-async function setupWebDriver() {
-  const driver = await new Builder()
-    .forBrowser("chrome")
-    .setChromeOptions(chromeOptions)
-    .build();
-  return driver;
-}
+// async function setupWebDriver() {
+//   const driver = await new Builder()
+//     .forBrowser("chrome")
+//     .setChromeOptions(chromeOptions)
+//     .build();
+//   return driver;
+// }
 async function signUpCustomer(email, password) {
   let driver;
   const SUCCESSFULURL = `${process.env.FRONT_URL}/thank-you/${email}`;

@@ -2,6 +2,7 @@ const { Builder, Capabilities, Key, By } = require("selenium-webdriver");
 const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
+const { setupWebDriver } = require("../../utils/utils");
 const chromeOptions = new chrome.Options();
 
 const url = `${process.env.FRONT_URL}/sign-in`;
@@ -12,10 +13,11 @@ let result = "";
 async function logIn(email, password) {
   let driver;
   //---------START create web driver--------------//
-  driver = await new Builder()
-    .forBrowser("chrome")
-    .setChromeOptions(chromeOptions)
-    .build();
+  driver = await setupWebDriver();
+  // driver = await new Builder()
+  //   .forBrowser("chrome")
+  //   .setChromeOptions(chromeOptions)
+  //   .build();
   //---------END--------------//
   try {
     //---------START open url--------------//
