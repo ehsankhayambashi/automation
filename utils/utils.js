@@ -66,7 +66,7 @@ async function getElementByClassName(driver, className) {
 
 async function waitForUrlAndCheck(driver, expectedUrl) {
   try {
-    await driver.sleep(20000); // Wait for 10 seconds
+    await driver.sleep(10000); // Wait for 10 seconds
     const currentURL = await driver.getCurrentUrl();
     return currentURL === expectedUrl;
   } catch (error) {
@@ -96,6 +96,18 @@ async function getElementById(driver, id) {
   }
 }
 
+async function getInputByPlaceH(driver, placeholderText) {
+  try {
+    const inputElement = await driver.findElement(
+      By.css(`input[placeholder="${placeholderText}"]`)
+    );
+    return element;
+  } catch (error) {
+    console.error("An error occurred getInputByPlaceH:", error);
+    return null;
+  }
+}
+
 module.exports = {
   setupWebDriver,
   getDivByClassNameAndContent,
@@ -105,4 +117,5 @@ module.exports = {
   waitForUrlAndCheck,
   getCheckboxByClassName,
   getElementById,
+  getInputByPlaceH,
 };

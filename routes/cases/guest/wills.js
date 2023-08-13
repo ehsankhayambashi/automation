@@ -4,15 +4,16 @@ const {
   doesElementExist,
   getDivByClassName,
   getElementByClassName,
-  checkUrlAndReturnResult,
   waitForUrlAndCheck,
   getCheckboxByClassName,
   getElementById,
+  getElementByName,
+  getInputByPlaceH,
 } = require("../../../utils/utils");
 
 async function wills() {
   const driver = await setupWebDriver();
-
+  let log = "error";
   try {
     await driver.get(process.env.FRONT_URL);
     //get wills case
@@ -95,9 +96,49 @@ async function wills() {
             driver,
             `${process.env.FRONT_URL}/relevant-lawyers/customize-package/purchase-package`
           );
-          console.log("purches", purches);
+          if (purches) {
+            const cardInput = await getInputByPlaceH(
+              driver,
+              "1234 1234 1234 1234"
+            );
+            const expDateInput = await getInputByPlaceH(driver, "exp-MM / YY");
+            const cvcInput = await getInputByPlaceH(driver, "CVC");
+            await cardInput.sendKeys("4242424242424242");
+            await expDateInput.sendKeys("826");
+            await cvcInput.sendKeys("2222");
+            const addButton = await getDivByClassName(
+              driver,
+              "ant-btn ant-btn-grey sc-aXZVg hhvzpH"
+            );
+            await addButton.click();
+            const purchesButton = await getDivByClassName(
+              driver,
+              "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
+            );
+            await purchesButton.click();
+
+            const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
+            const done = await waitForUrlAndCheck(driver, doneUrl);
+            if (done) {
+              log = {
+                test: "buy a case (wills) as guest",
+                result: "successful",
+              };
+            } else {
+              log = {
+                test: "buy a case (wills) as guest",
+                result: "failed",
+              };
+            }
+          }
         }
       }
+    }
+    const jsonString = JSON.stringify(log) + "\n\n";
+    try {
+      fs.appendFileSync("log.txt", jsonString);
+    } catch (error) {
+      // console.error(err);
     }
   } finally {
     // await driver.quit();
