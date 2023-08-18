@@ -2,7 +2,10 @@ const { Builder, Capabilities, Key, By } = require("selenium-webdriver");
 const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
-const { setupWebDriver } = require("../../utils/utils");
+const {
+  setupWebDriver,
+  writeJsonObjectToFile,
+} = require("../../../utils/utils");
 const chromeOptions = new chrome.Options();
 
 const url = `${process.env.FRONT_URL}/sign-in`;
@@ -58,18 +61,19 @@ async function logIn(email, password) {
     //---------START write to log file--------------//
     // log = `Log In TEST\n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
     log = {
-      test: "log in",
+      test: "log in customer",
       email: email,
       password: password,
       result: result,
     };
-    const jsonString = JSON.stringify(log, null, 2) + "\n";
-    try {
-      fs.appendFileSync("log.txt", jsonString);
-      console.log("File has been saved.");
-    } catch (error) {
-      console.error(err);
-    }
+    writeJsonObjectToFile("log.txt", log);
+    // const jsonString = JSON.stringify(log, null, 2) + "\n";
+    // try {
+    //   fs.appendFileSync("log.txt", jsonString);
+    //   console.log("File has been saved.");
+    // } catch (error) {
+    //   console.error(err);
+    // }
     //---------END--------------//
   } finally {
     // await driver.quit();

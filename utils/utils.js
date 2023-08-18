@@ -1,7 +1,10 @@
 const { Builder, By } = require("selenium-webdriver");
 const { Options } = require("selenium-webdriver/chrome");
-
+const uuid = require("uuid");
+const axios = require("axios");
+const fs = require("fs").promises;
 const chrome = require("selenium-webdriver/chrome");
+const { decodeData, codeData } = require("./hashHelper");
 const chromeOptions = new chrome.Options();
 
 async function setupWebDriver() {
@@ -64,9 +67,19 @@ async function getElementByClassName(driver, className) {
   }
 }
 
+async function getElementByName(driver, name) {
+  try {
+    const element = await driver.findElement(By.name(name));
+    return element;
+  } catch (error) {
+    console.error("An error occurred getElementByName:", error);
+    return null;
+  }
+}
+
 async function waitForUrlAndCheck(driver, expectedUrl) {
   try {
-    await driver.sleep(10000); // Wait for 10 seconds
+    await driver.sleep(20000); // Wait for 60 seconds
     const currentURL = await driver.getCurrentUrl();
     return currentURL === expectedUrl;
   } catch (error) {
@@ -108,6 +121,72 @@ async function getInputByPlaceH(driver, placeholderText) {
   }
 }
 
+async function getElementByContentAndType(driver, elementType, elementContent) {
+  try {
+    const elementSelector = `${elementType}[value="${elementContent}"]`;
+    const element = await driver.findElement(By.css(elementSelector));
+    return element;
+  } catch (error) {
+    console.error("An error occurred:", error);
+    return null;
+  }
+}
+async function writeJsonObjectToFile(filePath, newJsonObject) {
+  try {
+    let existingData = await fs.readFile(filePath, "utf-8");
+    existingData = existingData.trim(); // Remove any leading/trailing whitespace
+
+    let existingJsonArray = [];
+    if (existingData) {
+      existingJsonArray = JSON.parse(existingData);
+      if (!Array.isArray(existingJsonArray)) {
+        throw new Error("Existing data in the file is not a valid JSON array.");
+      }
+    }
+
+    existingJsonArray.push(newJsonObject);
+
+    const updatedJsonString = JSON.stringify(existingJsonArray, null, 2);
+    await fs.writeFile(filePath, updatedJsonString, "utf-8");
+    console.log("New JSON object added to file successfully.");
+  } catch (error) {
+    console.error("Error appending JSON object to file:", error);
+  }
+}
+function makeEmail() {
+  let id = uuid.v1();
+  id = id.substring(0, id.indexOf("-"));
+  const email = `qa-${id}@mailinator.com`;
+  return email.toString();
+}
+async function fetchUserData(email) {
+  try {
+    const response = await axios.get(`${process.env.Back_URL}/users`, {
+      params: {
+        email: email,
+      },
+    });
+    console.log("response", response.data.data);
+    const data = decodeData(response.data.data);
+    console.log("new data", data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+async function fetchData(endPoint, params) {
+  try {
+    const response = await axios.post(`${process.env.Back_URL}/${endPoint}`, {
+      hash: params,
+    });
+    // console.log("response", response);
+    const data = decodeData(response.data);
+    console.log("new data", data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 module.exports = {
   setupWebDriver,
   getDivByClassNameAndContent,
@@ -118,4 +197,10 @@ module.exports = {
   getCheckboxByClassName,
   getElementById,
   getInputByPlaceH,
+  getElementByContentAndType,
+  writeJsonObjectToFile,
+  getElementByName,
+  makeEmail,
+  fetchUserData,
+  fetchData,
 };

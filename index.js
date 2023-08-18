@@ -1,15 +1,27 @@
 require("dotenv").config();
-// require("./routes/AuthCustomer/signUp");
-// require("./routes/AuthCustomer/logIn");
 
 // signup and login customer
-// require("./routes/AuthCustomer/signUpLogIn");
+// require("./routes/Auth/Customer/signUpLogIn");
 
 // signup and login lawyer
-// require("./routes/AuthLawyer/signUpLogIn");
+// require("./routes/Auth/Lawyer/signUpLogIn");
+
+// signup login partner
+// require("./routes/Auth/Partner/signUpLogin");
+
+//signup login firm
+// require("./routes/Auth/Firm/signUpLogin");
+
+// //sign in Firm's Lawyer
+// require("./routes/Auth/Firm's Lawyer/testLogIn");
+
+//sign in partner's Lawyer
+// require("./routes/Auth/Partner's Lawyer/testLogIn");
 
 // forgot password
-// require("./routes/ForgotPassword/forgotPassword");
+require("./routes/Auth/ForgotPassword/forgotPassword")(
+  "qa-8116f3f0@mailinator.com"
+);
 
 // buy a wills case as guest
-require("./routes/cases/guest/wills");
+// require("./routes/cases/guest/wills");

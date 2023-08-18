@@ -7,13 +7,18 @@ const {
   waitForUrlAndCheck,
   getCheckboxByClassName,
   getElementById,
-  getElementByName,
   getInputByPlaceH,
+  getElementByContentAndType,
+  writeJsonObjectToFile,
+  getElementByName,
 } = require("../../../utils/utils");
 
 async function wills() {
   const driver = await setupWebDriver();
-  let log = "error";
+  let log = {
+    test: "buy a case (wills) as guest",
+    result: "failed",
+  };
   try {
     await driver.get(process.env.FRONT_URL);
     //get wills case
@@ -97,21 +102,9 @@ async function wills() {
             `${process.env.FRONT_URL}/relevant-lawyers/customize-package/purchase-package`
           );
           if (purches) {
-            const cardInput = await getInputByPlaceH(
-              driver,
-              "1234 1234 1234 1234"
-            );
-            const expDateInput = await getInputByPlaceH(driver, "exp-MM / YY");
-            const cvcInput = await getInputByPlaceH(driver, "CVC");
-            await cardInput.sendKeys("4242424242424242");
-            await expDateInput.sendKeys("826");
-            await cvcInput.sendKeys("2222");
-            const addButton = await getDivByClassName(
-              driver,
-              "ant-btn ant-btn-grey sc-aXZVg hhvzpH"
-            );
-            await addButton.click();
-            const purchesButton = await getDivByClassName(
+            await driver.sleep(10000); // Wait for 10 seconds
+
+            const purchesButton = await getElementByClassName(
               driver,
               "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
             );
@@ -134,14 +127,9 @@ async function wills() {
         }
       }
     }
-    const jsonString = JSON.stringify(log) + "\n\n";
-    try {
-      fs.appendFileSync("log.txt", jsonString);
-    } catch (error) {
-      // console.error(err);
-    }
+    writeJsonObjectToFile("log.txt", log);
   } finally {
-    // await driver.quit();
+    await driver.quit();
   }
 }
 

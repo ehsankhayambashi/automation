@@ -4,8 +4,11 @@ const fs = require("fs");
 const chrome = require("selenium-webdriver/chrome");
 const webdriver = require("selenium-webdriver");
 const axios = require("axios");
-const { decodeData } = require("../../utils/hashHelper");
-const { setupWebDriver } = require("../../utils/utils");
+const { decodeData } = require("../../../utils/hashHelper");
+const {
+  setupWebDriver,
+  writeJsonObjectToFile,
+} = require("../../../utils/utils");
 const chromeOptions = new chrome.Options();
 
 let log = "";
@@ -135,19 +138,20 @@ async function signUpCustomer(email, password) {
     //---------START write to log file--------------//
     // log = `SIGN UP TEST\n role: ${radioValue} \n first name: ${firstName} \n last name: ${lastName} \n email : ${email} \n password: ${password} \n RESULT: ${result}\n------------------------ \n`;
     log = {
-      test: "sign up",
+      test: "sign up customer",
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
       result: result,
     };
-    const jsonString = JSON.stringify(log) + "\n\n";
-    try {
-      fs.appendFileSync("log.txt", jsonString);
-    } catch (error) {
-      // console.error(err);
-    }
+    writeJsonObjectToFile("log.txt", log);
+    // const jsonString = JSON.stringify(log) + "\n\n";
+    // try {
+    //   fs.appendFileSync("log.txt", jsonString);
+    // } catch (error) {
+    //   // console.error(err);
+    // }
     //---------END--------------//
   } finally {
     await driver.quit();
