@@ -6,25 +6,30 @@ const fs = require("fs").promises;
 const chrome = require("selenium-webdriver/chrome");
 const { decodeData, codeData } = require("./hashHelper");
 const chromeOptions = new chrome.Options();
+require("dotenv").config();
 
 async function setupWebDriver() {
-  //------------WINDOWS-------------//
-  const driver = await new Builder()
-    .forBrowser("chrome")
-    .setChromeOptions(chromeOptions)
-    .build();
-  return driver;
-  //------------END WINDOWS-------------//
-
-  // ----------LINUX------------//
-  // let builder = new Builder().forBrowser("chrome");
-  // let options = new Options();
-  // options.headless(); // run headless Chrome
-  // options.excludeSwitches(["enable-logging"]); // disable 'DevTools listening on...'
-  // options.addArguments(["--no-sandbox"]); // not an advised flag but eliminates "DevToolsActivePort file doesn't exist" error.
-  // let driver = await builder.setChromeOptions(options).build();
-  //return driver;
-  // ----------END LINUX------------//
+  const isWindows = process.env.IS_WINDOWS;
+  console.log("isWindows", isWindows);
+  if (isWindows == "true") {
+    //------------WINDOWS-------------//
+    const driver = await new Builder()
+      .forBrowser("chrome")
+      .setChromeOptions(chromeOptions)
+      .build();
+    return driver;
+    //------------END WINDOWS-------------//
+  } else {
+    // ----------LINUX------------//
+    let builder = new Builder().forBrowser("chrome");
+    let options = new Options();
+    options.headless(); // run headless Chrome
+    options.excludeSwitches(["enable-logging"]); // disable 'DevTools listening on...'
+    options.addArguments(["--no-sandbox"]); // not an advised flag but eliminates "DevToolsActivePort file doesn't exist" error.
+    let driver = await builder.setChromeOptions(options).build();
+    return driver;
+    // ----------END LINUX------------//
+  }
 }
 
 async function getDivByClassNameAndContent(driver, className, content) {
@@ -79,7 +84,7 @@ async function getElementByName(driver, name) {
 
 async function waitForUrlAndCheck(driver, expectedUrl) {
   try {
-    await driver.sleep(20000); // Wait for 60 seconds
+    await driver.sleep(20000); // Wait for 20 seconds
     const currentURL = await driver.getCurrentUrl();
     return currentURL === expectedUrl;
   } catch (error) {
@@ -166,7 +171,6 @@ async function fetchUserData(email) {
         email: email,
       },
     });
-    console.log("response", response.data.data);
     const data = decodeData(response.data.data);
     console.log("new data", data);
     return data;
@@ -174,15 +178,13 @@ async function fetchUserData(email) {
     console.error(error);
   }
 }
-async function fetchData(endPoint, params) {
+async function postData(endPoint, params) {
   try {
     const response = await axios.post(`${process.env.Back_URL}/${endPoint}`, {
       hash: params,
     });
-    // console.log("response", response);
     const data = decodeData(response.data);
-    console.log("new data", data);
-    return data;
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -202,5 +204,5 @@ module.exports = {
   getElementByName,
   makeEmail,
   fetchUserData,
-  fetchData,
+  postData,
 };

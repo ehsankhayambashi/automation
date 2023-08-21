@@ -12,7 +12,7 @@ require("dotenv").config();
 //signup login firm
 // require("./routes/Auth/Firm/signUpLogin");
 
-// //sign in Firm's Lawyer
+//sign in Firm's Lawyer
 // require("./routes/Auth/Firm's Lawyer/testLogIn");
 
 //sign in partner's Lawyer
@@ -20,7 +20,7 @@ require("dotenv").config();
 
 // forgot password
 require("./routes/Auth/ForgotPassword/forgotPassword")(
-  "qa-8116f3f0@mailinator.com"
+  "qa-7c4715d0@mailinator.com"
 );
 
 // buy a wills case as guest

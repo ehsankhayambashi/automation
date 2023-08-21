@@ -87,7 +87,7 @@
     "test": "sign up firm",
     "result": "SUCCESSFUL",
     "firstName": "John",
-    "lastName": "Doe",
+    "lastName": "Doe INEMAIL",
     "email": "qa-c95c7510@mailinator.com"
   },
   {
@@ -138,5 +138,10 @@
     "test": "Sign in Firm's Lawyer",
     "result": "SUCCESSFUL",
     "email": "firm@mailinator.com"
+  },
+  {
+    "test": "forgot password",
+    "result": "SUCCESSFUL",
+    "email": "qa-7c4715d0@mailinator.com"
   }
 ]
