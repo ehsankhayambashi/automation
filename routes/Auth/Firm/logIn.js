@@ -31,7 +31,7 @@ async function logIn(email, password) {
     writeJsonObjectToFile("log.txt", log);
   } catch (error) {
   } finally {
-    // await driver.quit();
+    await driver.quit();
   }
 }
 

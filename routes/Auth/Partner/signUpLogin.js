@@ -8,8 +8,9 @@ async function signUpLogin() {
       await logIn(email, password);
     }
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 }
 
-signUpLogin();
+// signUpLogin();
+module.exports = signUpLogin;

@@ -21,4 +21,5 @@ async function signUpLogin() {
   }
 }
 
-signUpLogin();
+// signUpLogin();
+module.exports = signUpLogin;

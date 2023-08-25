@@ -8,4 +8,5 @@ async function testLogIn() {
   }
 }
 
-testLogIn();
+// testLogIn();
+module.exports = testLogIn;

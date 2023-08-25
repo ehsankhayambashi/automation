@@ -76,7 +76,7 @@ async function logIn(email, password) {
     // }
     //---------END--------------//
   } finally {
-    // await driver.quit();
+    await driver.quit();
   }
 }
 module.exports = logIn;

@@ -1,27 +1,37 @@
 require("dotenv").config();
 
 // signup and login customer
-// require("./routes/Auth/Customer/signUpLogIn");
+const customerFullAuth = require("./routes/Auth/Customer/signUpLogIn");
 
 // signup and login lawyer
-// require("./routes/Auth/Lawyer/signUpLogIn");
+const lawyerFullAuth = require("./routes/Auth/Lawyer/signUpLogIn");
 
 // signup login partner
-// require("./routes/Auth/Partner/signUpLogin");
+const partnerFullAuth = require("./routes/Auth/Partner/signUpLogin");
 
 //signup login firm
-// require("./routes/Auth/Firm/signUpLogin");
+const firmFullAuth = require("./routes/Auth/Firm/signUpLogin");
 
 //sign in Firm's Lawyer
-// require("./routes/Auth/Firm's Lawyer/testLogIn");
+const signInFirmsLawyer = require("./routes/Auth/Firm's Lawyer/testLogIn");
 
 //sign in partner's Lawyer
-// require("./routes/Auth/Partner's Lawyer/testLogIn");
+const signInPartnersLawyer = require("./routes/Auth/Partner's Lawyer/testLogIn");
 
 // forgot password
-require("./routes/Auth/ForgotPassword/forgotPassword")(
-  "qa-7c4715d0@mailinator.com"
-);
+const forgotPassword = require("./routes/Auth/ForgotPassword/forgotPassword");
 
 // buy a wills case as guest
 // require("./routes/cases/guest/wills");
+
+async function runAutomation() {
+  await customerFullAuth();
+  await lawyerFullAuth();
+  await partnerFullAuth();
+  await firmFullAuth();
+  await signInFirmsLawyer();
+  await signInPartnersLawyer();
+  await forgotPassword("qa-7c4715d0@mailinator.com");
+}
+
+runAutomation();

@@ -27,6 +27,7 @@ async function forgotPassword(email) {
     writeJsonObjectToFile("log.txt", log);
   } catch (error) {
   } finally {
+    await driver.quit();
   }
 }
 // forgotPassword();

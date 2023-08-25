@@ -8,6 +8,8 @@ const { decodeData, codeData } = require("./hashHelper");
 const chromeOptions = new chrome.Options();
 require("dotenv").config();
 
+const chromePath =
+  "/Users/ehsankhayambashi/Downloads/chromedriver-mac-x64/chromedriver";
 async function setupWebDriver() {
   const isWindows = process.env.IS_WINDOWS;
   console.log("isWindows", isWindows);
@@ -16,6 +18,7 @@ async function setupWebDriver() {
     const driver = await new Builder()
       .forBrowser("chrome")
       .setChromeOptions(chromeOptions)
+      .setChromeService(new chrome.ServiceBuilder(chromePath))
       .build();
     return driver;
     //------------END WINDOWS-------------//
