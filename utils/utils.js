@@ -138,7 +138,20 @@ async function getElementByContentAndType(driver, elementType, elementContent) {
 }
 async function writeJsonObjectToFile(filePath, newJsonObject) {
   try {
-    let existingData = await fs.readFile(filePath, "utf-8");
+    const datetime = new Date();
+
+    // Add date and time properties to the newJsonObject
+    newJsonObject["date"] = datetime.toISOString().slice(0, 10);
+    newJsonObject["time"] = datetime.toTimeString().slice(0, 8);
+
+    let existingData = "";
+
+    try {
+      existingData = await fs.readFile(filePath, "utf-8");
+    } catch (readError) {
+      // File doesn't exist, so it will be created
+    }
+
     existingData = existingData.trim(); // Remove any leading/trailing whitespace
 
     let existingJsonArray = [];
@@ -149,11 +162,22 @@ async function writeJsonObjectToFile(filePath, newJsonObject) {
       }
     }
 
+    // If the existing array doesn't exist, create a new one
+    if (!Array.isArray(existingJsonArray)) {
+      existingJsonArray = [];
+    }
+
     existingJsonArray.push(newJsonObject);
 
     const updatedJsonString = JSON.stringify(existingJsonArray, null, 2);
-    await fs.writeFile(filePath, updatedJsonString, "utf-8");
-    console.log("New JSON object added to file successfully.");
+
+    // Create the file if it doesn't exist
+    try {
+      await fs.writeFile(filePath, updatedJsonString, "utf-8");
+      console.log("New JSON object added to file successfully.");
+    } catch (writeError) {
+      console.error("Error writing to file:", writeError);
+    }
   } catch (error) {
     console.error("Error appending JSON object to file:", error);
   }
