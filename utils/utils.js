@@ -12,7 +12,6 @@ const chromePath =
   "/Users/ehsankhayambashi/Downloads/chromedriver-mac-x64/chromedriver";
 async function setupWebDriver() {
   const isWindows = process.env.IS_WINDOWS;
-  console.log("isWindows", isWindows);
   if (isWindows == "true") {
     //------------WINDOWS-------------//
     const driver = await new Builder()

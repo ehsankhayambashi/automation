@@ -22,7 +22,7 @@ const signInPartnersLawyer = require("./routes/Auth/Partner's Lawyer/testLogIn")
 const forgotPassword = require("./routes/Auth/ForgotPassword/forgotPassword");
 
 // buy a wills case as guest
-// require("./routes/cases/guest/wills");
+require("./routes/cases/guest/wills");
 
 async function runAutomation() {
   await customerFullAuth();
@@ -33,5 +33,4 @@ async function runAutomation() {
   await signInPartnersLawyer();
   await forgotPassword("qa-7c4715d0@mailinator.com");
 }
-
-runAutomation();
+// runAutomation();

@@ -103,33 +103,39 @@ async function wills() {
           );
           if (purches) {
             await driver.sleep(10000); // Wait for 10 seconds
+            //inja
+            const frame = await driver.switchTo().frame(0);
+            const cartNumerInput = await getElementByName(driver, "cardnumber");
+            console.log("cartNumerInput", cartNumerInput);
+            await cartNumerInput.sendKeys("1234");
 
-            const purchesButton = await getElementByClassName(
-              driver,
-              "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
-            );
-            await purchesButton.click();
+            //check card
+            // const purchesButton = await getElementByClassName(
+            //   driver,
+            //   "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
+            // );
+            // await purchesButton.click();
 
-            const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
-            const done = await waitForUrlAndCheck(driver, doneUrl);
-            if (done) {
-              log = {
-                test: "buy a case (wills) as guest",
-                result: "successful",
-              };
-            } else {
-              log = {
-                test: "buy a case (wills) as guest",
-                result: "failed",
-              };
-            }
+            // const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
+            // const done = await waitForUrlAndCheck(driver, doneUrl);
+            // if (done) {
+            //   log = {
+            //     test: "buy a case (wills) as guest",
+            //     result: "successful",
+            //   };
+            // } else {
+            //   log = {
+            //     test: "buy a case (wills) as guest",
+            //     result: "failed",
+            //   };
+            // }
           }
         }
       }
     }
     writeJsonObjectToFile("log.txt", log);
   } finally {
-    await driver.quit();
+    // await driver.quit();
   }
 }
 
