@@ -215,6 +215,19 @@ async function postData(endPoint, params) {
     console.error(error);
   }
 }
+
+async function getIframeByTitle(driver, title) {
+  try {
+    const iframeElement = await driver.findElement(
+      By.css(`iframe[title=${title}]`)
+    );
+    return iframeElement;
+  } catch (error) {
+    console.error("An error occurred getElementById:", error);
+    return null;
+  }
+}
+
 module.exports = {
   setupWebDriver,
   getDivByClassNameAndContent,
@@ -231,4 +244,5 @@ module.exports = {
   makeEmail,
   fetchUserData,
   postData,
+  getIframeByTitle,
 };

@@ -12,23 +12,23 @@ const {
   writeJsonObjectToFile,
   getElementByName,
 } = require("../../../utils/utils");
-const { By } = require("selenium-webdriver");
-async function wills() {
+
+async function personalInjury() {
   const driver = await setupWebDriver();
   let log = {
-    test: "buy a case (wills) as guest",
+    test: "buy a case (personal injury) as guest",
     result: "failed",
   };
   try {
     await driver.get(process.env.FRONT_URL);
-    //get wills case
-    const willsDiv = await getDivByClassNameAndContent(
+    await driver.sleep(10000);
+    const personalInjuryDev = await getDivByClassNameAndContent(
       driver,
       "popular_legal_searches_categories_services",
-      "Wills"
+      "Personal Injury Matters"
     );
-    //select wills case
-    await willsDiv.click();
+    //select personal injury case
+    await personalInjuryDev.click();
 
     //get finish button if exist
     let isExist = await doesElementExist(
@@ -59,16 +59,14 @@ async function wills() {
     const expectedUrl = `${process.env.FRONT_URL}/relevant-lawyers-out`;
     // get result of that check
     const continiue = await waitForUrlAndCheck(driver, expectedUrl);
-    // if everything is ok
     if (continiue) {
       //get lawyer button
       const lawyerButton = await getElementByClassName(
         driver,
-        "ant-btn ant-btn-primary sc-aXZVg fiYrTU"
+        "ant-btn ant-btn-primary sc-aXZVg fNCWkA"
       );
       //click lawyer button
       await lawyerButton.click();
-
       const checkoutUrl = `${process.env.FRONT_URL}/relevant-lawyers-out/customize-package`;
       // get result of that check
       const ok = await waitForUrlAndCheck(driver, checkoutUrl);
@@ -78,11 +76,11 @@ async function wills() {
           "ant-btn ant-btn-primary sc-aXZVg gZhPjw"
         );
         await continiueButton.click();
-        const lastStep = await waitForUrlAndCheck(
+        const loginPage = await waitForUrlAndCheck(
           driver,
           checkoutUrl + "/" + "log-in"
         );
-        if (lastStep) {
+        if (loginPage) {
           const alreadyAccount = await getCheckboxByClassName(
             driver,
             "ant-checkbox-input"
@@ -97,49 +95,12 @@ async function wills() {
             "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
           );
           await nextButton.click();
-          const purches = await waitForUrlAndCheck(
+          const purchesPage = await waitForUrlAndCheck(
             driver,
             `${process.env.FRONT_URL}/relevant-lawyers/customize-package/purchase-package`
           );
-          if (purches) {
-            await driver.sleep(5000); // Wait for 10 seconds
-
-            const isCardExist = await doesElementExist(
-              driver,
-              "ant-radio-input"
-            );
-            if (!isCardExist) {
-              const cartIframe = await driver.findElement(
-                By.css('iframe[title="Secure card number input frame"]')
-              );
-              await driver.switchTo().frame(cartIframe);
-              const cartNumber = await getElementByName(driver, "cardnumber");
-              await cartNumber.sendKeys("4242424242424242");
-              await driver.switchTo().defaultContent();
-
-              const expirationIframe = await driver.findElement(
-                By.css('iframe[title="Secure expiration date input frame"]')
-              );
-              await driver.switchTo().frame(expirationIframe);
-              const cartExpiration = await getElementByName(driver, "exp-date");
-              await cartExpiration.sendKeys("0624");
-              await driver.switchTo().defaultContent();
-
-              const cvcIframe = await driver.findElement(
-                By.css('iframe[title="Secure CVC input frame"]')
-              );
-              await driver.switchTo().frame(cvcIframe);
-              const cartCvc = await getElementByName(driver, "cvc");
-              await cartCvc.sendKeys("740");
-              await driver.switchTo().defaultContent();
-
-              const addButtonCart = await getElementByClassName(
-                driver,
-                "ant-btn ant-btn-grey sc-aXZVg hhvzpH"
-              );
-              await addButtonCart.click();
-              await driver.sleep(9000);
-            }
+          if (purchesPage) {
+            await driver.sleep(5000); // Wait for 5 seconds
             const purchesButton = await getElementByClassName(
               driver,
               "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
@@ -149,7 +110,7 @@ async function wills() {
             const done = await waitForUrlAndCheck(driver, doneUrl);
             if (done) {
               log = {
-                test: "buy a case (wills) as guest",
+                test: "buy a case (personal injury) as guest",
                 result: "successful",
               };
             }
@@ -163,4 +124,4 @@ async function wills() {
   }
 }
 
-wills();
+personalInjury();

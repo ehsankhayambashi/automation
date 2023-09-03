@@ -22,7 +22,12 @@ const signInPartnersLawyer = require("./routes/Auth/Partner's Lawyer/testLogIn")
 const forgotPassword = require("./routes/Auth/ForgotPassword/forgotPassword");
 
 // buy a wills case as guest
-require("./routes/cases/guest/wills");
+// require("./routes/cases/guest/wills");
+
+// buy a personal injury case as guest
+// require("./routes/cases/guest/personalInjury");
+// buy a real state case as guest
+require("./routes/cases/guest/realState");
 
 async function runAutomation() {
   await customerFullAuth();

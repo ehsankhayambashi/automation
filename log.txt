@@ -123,5 +123,101 @@
     "result": "failed",
     "date": "2023-09-01",
     "time": "20:10:01"
+  },
+  {
+    "test": "sign up partner",
+    "result": "SUCCESSFUL",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "qa-d9f71880@mailinator.com",
+    "date": "2023-09-03",
+    "time": "15:34:00"
+  },
+  {
+    "test": "sign in partner",
+    "result": "FAILED",
+    "email": "qa-d9f71880@mailinator.com",
+    "date": "2023-09-03",
+    "time": "15:34:39"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "15:43:17"
+  },
+  {
+    "test": "sign up customer",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "qa-5b45dbf0@mailinator.com",
+    "password": "P@ssword1",
+    "result": "SUCCESSFUL",
+    "date": "2023-09-03",
+    "time": "15:44:35"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "16:34:32"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "17:08:26"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "17:19:05"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "17:25:53"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "failed",
+    "date": "2023-09-03",
+    "time": "17:29:06"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "successful",
+    "date": "2023-09-03",
+    "time": "17:31:43"
+  },
+  {
+    "test": "sign up customer",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "qa-8b48f990@mailinator.com",
+    "password": "P@ssword1",
+    "result": "SUCCESSFUL",
+    "date": "2023-09-03",
+    "time": "17:33:25"
+  },
+  {
+    "test": "buy a case (wills) as guest",
+    "result": "successful",
+    "date": "2023-09-03",
+    "time": "17:38:35"
+  },
+  {
+    "test": "buy a case (personal injury) as guest",
+    "result": "successful",
+    "date": "2023-09-03",
+    "time": "18:00:28"
+  },
+  {
+    "test": "buy a case (personal injury) as guest",
+    "result": "successful",
+    "date": "2023-09-03",
+    "time": "18:32:06"
   }
 ]
