@@ -163,4 +163,5 @@ async function wills() {
   }
 }
 
-wills();
+module.exports = wills;
+// wills();

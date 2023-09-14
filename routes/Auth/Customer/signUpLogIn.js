@@ -7,6 +7,7 @@ async function signUpLogin() {
   let id = uuid.v1();
   id = id.substring(0, id.indexOf("-"));
   const signUpEmail = `qa-${id}@mailinator.com`;
+  // const signUpEmail = `qatest@mailinator.com`;
   const signUpPassword = "P@ssword1";
   try {
     const { email, password, result } = await signUp(

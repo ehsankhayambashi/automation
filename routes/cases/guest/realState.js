@@ -122,4 +122,5 @@ async function realState() {
     await driver.quit();
   }
 }
-realState();
+module.exports = realState;
+// realState();

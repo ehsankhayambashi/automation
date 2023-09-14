@@ -120,8 +120,8 @@ async function personalInjury() {
     }
     writeJsonObjectToFile("log.txt", log);
   } finally {
-    await driver.quit();
+    // await driver.quit();
   }
 }
-
-personalInjury();
+module.exports = personalInjury;
+// personalInjury();

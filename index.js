@@ -22,12 +22,18 @@ const signInPartnersLawyer = require("./routes/Auth/Partner's Lawyer/testLogIn")
 const forgotPassword = require("./routes/Auth/ForgotPassword/forgotPassword");
 
 // buy a wills case as guest
-// require("./routes/cases/guest/wills");
-
+const willsAsGuest = require("./routes/cases/guest/wills");
 // buy a personal injury case as guest
-// require("./routes/cases/guest/personalInjury");
+const personalInjuryAsGuest = require("./routes/cases/guest/personalInjury");
 // buy a real state case as guest
-require("./routes/cases/guest/realState");
+const realEstateAsGuest = require("./routes/cases/guest/realState");
+
+// customer case wills
+const willsAsCustomer = require("./routes/cases/customer/wills");
+// customer case real state
+const realEstateAsCustomer = require("./routes/cases/customer/realState");
+// custore case personal injury
+const personalInjuryAsCustomer = require("./routes/cases/customer/personalInjury");
 
 async function runAutomation() {
   await customerFullAuth();
@@ -37,5 +43,11 @@ async function runAutomation() {
   await signInFirmsLawyer();
   await signInPartnersLawyer();
   await forgotPassword("qa-7c4715d0@mailinator.com");
+  await willsAsGuest();
+  await realEstateAsGuest();
+  await personalInjuryAsGuest();
+  await willsAsCustomer();
+  await realEstateAsCustomer();
+  await personalInjuryAsCustomer();
 }
-// runAutomation();
+runAutomation();

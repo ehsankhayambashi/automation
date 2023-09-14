@@ -74,6 +74,16 @@ async function getElementByClassName(driver, className) {
   }
 }
 
+async function getAllElementsByClassName(driver, className) {
+  try {
+    const elements = await driver.findElements(By.className(className));
+    return elements;
+  } catch (error) {
+    console.error("An error occurred getElementByClassName:", error);
+    return null;
+  }
+}
+
 async function getElementByName(driver, name) {
   try {
     const element = await driver.findElement(By.name(name));
@@ -86,7 +96,7 @@ async function getElementByName(driver, name) {
 
 async function waitForUrlAndCheck(driver, expectedUrl) {
   try {
-    await driver.sleep(20000); // Wait for 20 seconds
+    await driver.sleep(5000); // Wait for 20 seconds
     const currentURL = await driver.getCurrentUrl();
     return currentURL === expectedUrl;
   } catch (error) {
@@ -228,6 +238,16 @@ async function getIframeByTitle(driver, title) {
   }
 }
 
+async function getAllDivByClassNameAndContent(driver, className, content) {
+  try {
+    const xpathExpression = `//div[contains(@class, '${className}') and contains(text(), '${content}')]`;
+    const divElement = await driver.findElements(By.xpath(xpathExpression));
+    return divElement;
+  } catch (error) {
+    console.error("An error occurred for getDivByClassNameAndContent:", error);
+  }
+}
+
 module.exports = {
   setupWebDriver,
   getDivByClassNameAndContent,
@@ -245,4 +265,6 @@ module.exports = {
   fetchUserData,
   postData,
   getIframeByTitle,
+  getAllElementsByClassName,
+  getAllDivByClassNameAndContent,
 };

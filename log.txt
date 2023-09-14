@@ -3,221 +3,101 @@
     "test": "sign up customer",
     "firstName": "John",
     "lastName": "Doe",
-    "email": "qa-c275ca00@mailinator.com",
+    "email": "qa-bd42aad0@mailinator.com",
     "password": "P@ssword1",
     "result": "SUCCESSFUL",
-    "date": "2023-08-25",
-    "time": "13:34:43"
+    "date": "2023-09-14",
+    "time": "13:46:43"
   },
   {
     "test": "log in customer",
-    "email": "qa-c275ca00@mailinator.com",
+    "email": "qa-bd42aad0@mailinator.com",
     "password": "P@ssword1",
     "result": "SUCCESSFUL",
-    "date": "2023-08-25",
-    "time": "13:34:58"
+    "date": "2023-09-14",
+    "time": "13:47:02"
   },
   {
     "test": "sign up lawyer",
     "firstName": "John",
     "lastName": "Doe",
-    "email": "qa-d8d92490@mailinator.com",
+    "email": "qa-d8d9cee0@mailinator.com",
     "password": "P@ssword1",
     "result": "SUCCESSFUL",
-    "date": "2023-08-25",
-    "time": "13:35:22"
+    "date": "2023-09-14",
+    "time": "13:47:41"
   },
   {
     "test": "log in lawyer",
-    "email": "qa-d8d92490@mailinator.com",
+    "email": "qa-d8d9cee0@mailinator.com",
     "password": "P@ssword1",
     "result": "SUCCESSFUL",
-    "date": "2023-08-25",
-    "time": "13:35:40"
+    "date": "2023-09-14",
+    "time": "13:48:09"
   },
   {
     "test": "sign up partner",
     "result": "SUCCESSFUL",
     "firstName": "John",
     "lastName": "Doe",
-    "email": "qa-f2042aa0@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:36:27"
+    "email": "qa-00e2add0@mailinator.com",
+    "date": "2023-09-14",
+    "time": "13:48:45"
   },
   {
     "test": "sign in partner",
     "result": "SUCCESSFUL",
-    "email": "qa-f2042aa0@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:37:01"
+    "email": "qa-00e2add0@mailinator.com",
+    "date": "2023-09-14",
+    "time": "13:49:08"
   },
   {
     "test": "sign up firm",
     "result": "SUCCESSFUL",
     "firstName": "John",
     "lastName": "Doe",
-    "email": "qa-22a44960@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:37:45"
+    "email": "qa-23d4c120@mailinator.com",
+    "date": "2023-09-14",
+    "time": "13:49:39"
   },
   {
     "test": "sign in firm",
     "result": "SUCCESSFUL",
-    "email": "qa-22a44960@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:38:17"
+    "email": "qa-23d4c120@mailinator.com",
+    "date": "2023-09-14",
+    "time": "13:50:04"
   },
   {
     "test": "Sign in Firm's Lawyer",
     "result": "SUCCESSFUL",
     "email": "firm@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:38:51"
+    "date": "2023-09-14",
+    "time": "13:50:28"
   },
   {
     "test": "Sign in Partner's Lawyer",
     "result": "SUCCESSFUL",
     "email": "lawyer2004@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:39:25"
+    "date": "2023-09-14",
+    "time": "13:50:49"
   },
   {
     "test": "forgot password",
     "result": "SUCCESSFUL",
     "email": "qa-7c4715d0@mailinator.com",
-    "date": "2023-08-25",
-    "time": "13:39:39"
+    "date": "2023-09-14",
+    "time": "13:51:06"
   },
   {
     "test": "buy a case (wills) as guest",
     "result": "successful",
-    "date": "2023-09-01",
-    "time": "19:33:56"
+    "date": "2023-09-14",
+    "time": "13:51:58"
   },
   {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-01",
-    "time": "19:50:23"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-01",
-    "time": "20:00:07"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-01",
-    "time": "20:02:53"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-01",
-    "time": "20:07:23"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-01",
-    "time": "20:10:01"
-  },
-  {
-    "test": "sign up partner",
-    "result": "SUCCESSFUL",
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "qa-d9f71880@mailinator.com",
-    "date": "2023-09-03",
-    "time": "15:34:00"
-  },
-  {
-    "test": "sign in partner",
-    "result": "FAILED",
-    "email": "qa-d9f71880@mailinator.com",
-    "date": "2023-09-03",
-    "time": "15:34:39"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "15:43:17"
-  },
-  {
-    "test": "sign up customer",
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "qa-5b45dbf0@mailinator.com",
-    "password": "P@ssword1",
-    "result": "SUCCESSFUL",
-    "date": "2023-09-03",
-    "time": "15:44:35"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "16:34:32"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "17:08:26"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "17:19:05"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "17:25:53"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "failed",
-    "date": "2023-09-03",
-    "time": "17:29:06"
-  },
-  {
-    "test": "buy a case (wills) as guest",
+    "test": "buy a case (real state) as guest",
     "result": "successful",
-    "date": "2023-09-03",
-    "time": "17:31:43"
-  },
-  {
-    "test": "sign up customer",
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "qa-8b48f990@mailinator.com",
-    "password": "P@ssword1",
-    "result": "SUCCESSFUL",
-    "date": "2023-09-03",
-    "time": "17:33:25"
-  },
-  {
-    "test": "buy a case (wills) as guest",
-    "result": "successful",
-    "date": "2023-09-03",
-    "time": "17:38:35"
-  },
-  {
-    "test": "buy a case (personal injury) as guest",
-    "result": "successful",
-    "date": "2023-09-03",
-    "time": "18:00:28"
-  },
-  {
-    "test": "buy a case (personal injury) as guest",
-    "result": "successful",
-    "date": "2023-09-03",
-    "time": "18:32:06"
+    "date": "2023-09-14",
+    "time": "13:52:56"
   }
 ]
