@@ -11,6 +11,7 @@ const {
   getElementByContentAndType,
   writeJsonObjectToFile,
   getElementByName,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
 
 async function personalInjury() {
@@ -33,7 +34,7 @@ async function personalInjury() {
     //get finish button if exist
     let isExist = await doesElementExist(
       driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+      "ant-btn ant-btn-primary sc-aXZVg bITZdF"
     );
     //click on questions until finish button appear
     while (!isExist) {
@@ -45,13 +46,13 @@ async function personalInjury() {
       //get finish button if exist
       isExist = await doesElementExist(
         driver,
-        "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+        "ant-btn ant-btn-primary sc-aXZVg bITZdF"
       );
     }
     //get finish button
     const finishButton = await getElementByClassName(
       driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+      "ant-btn ant-btn-primary sc-aXZVg bITZdF"
     );
     // click on finish buttom
     await finishButton.click();
@@ -63,7 +64,7 @@ async function personalInjury() {
       //get lawyer button
       const lawyerButton = await getElementByClassName(
         driver,
-        "ant-btn ant-btn-primary sc-aXZVg fNCWkA"
+        "ant-btn ant-btn-primary sc-aXZVg cgUiCy"
       );
       //click lawyer button
       await lawyerButton.click();
@@ -73,7 +74,7 @@ async function personalInjury() {
       if (ok) {
         const continiueButton = await getElementByClassName(
           driver,
-          "ant-btn ant-btn-primary sc-aXZVg gZhPjw"
+          "ant-btn ant-btn-primary sc-aXZVg cJVKaW"
         );
         await continiueButton.click();
         const loginPage = await waitForUrlAndCheck(
@@ -103,7 +104,7 @@ async function personalInjury() {
             await driver.sleep(5000); // Wait for 5 seconds
             const purchesButton = await getElementByClassName(
               driver,
-              "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
+              "ant-btn ant-btn-primary sc-aXZVg cUULpq"
             );
             await purchesButton.click();
             const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
@@ -118,9 +119,9 @@ async function personalInjury() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
-    // await driver.quit();
+    await driver.quit();
   }
 }
 module.exports = personalInjury;

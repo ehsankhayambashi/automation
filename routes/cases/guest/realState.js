@@ -11,6 +11,7 @@ const {
   getElementByContentAndType,
   writeJsonObjectToFile,
   getElementByName,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
 async function realState() {
   const driver = await setupWebDriver();
@@ -32,7 +33,7 @@ async function realState() {
     //get finish button if exist
     let isExist = await doesElementExist(
       driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+      "ant-btn ant-btn-primary sc-aXZVg bITZdF"
     );
     //click on questions until finish button appear
     while (!isExist) {
@@ -44,13 +45,13 @@ async function realState() {
       //get finish button if exist
       isExist = await doesElementExist(
         driver,
-        "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+        "ant-btn ant-btn-primary sc-aXZVg bITZdF"
       );
     }
     //get finish button
     const finishButton = await getElementByClassName(
       driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+      "ant-btn ant-btn-primary sc-aXZVg bITZdF"
     );
     // click on finish buttom
     await finishButton.click();
@@ -62,7 +63,7 @@ async function realState() {
       //get lawyer button
       const lawyerButton = await getElementByClassName(
         driver,
-        "ant-btn ant-btn-primary sc-aXZVg fiYrTU"
+        "ant-btn ant-btn-primary sc-aXZVg eJmRsW"
       );
       //click lawyer button
       await lawyerButton.click();
@@ -72,7 +73,7 @@ async function realState() {
       if (ok) {
         const continiueButton = await getElementByClassName(
           driver,
-          "ant-btn ant-btn-primary sc-aXZVg gZhPjw"
+          "ant-btn ant-btn-primary sc-aXZVg cJVKaW"
         );
         await continiueButton.click();
         const loginPage = await waitForUrlAndCheck(
@@ -91,7 +92,7 @@ async function realState() {
           await passwordInput.sendKeys("P@ssword1");
           const nextButton = await getElementByClassName(
             driver,
-            "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+            "ant-btn ant-btn-primary sc-aXZVg bITZdF"
           );
           await nextButton.click();
           const purchesPage = await waitForUrlAndCheck(
@@ -102,7 +103,7 @@ async function realState() {
             await driver.sleep(5000); // Wait for 5 seconds
             const purchesButton = await getElementByClassName(
               driver,
-              "ant-btn ant-btn-primary sc-aXZVg cRDJgE"
+              "ant-btn ant-btn-primary sc-aXZVg bJua-dW"
             );
             await purchesButton.click();
             const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
@@ -117,7 +118,7 @@ async function realState() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
     await driver.quit();
   }

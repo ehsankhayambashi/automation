@@ -12,6 +12,7 @@ const {
   writeJsonObjectToFile,
   getElementByName,
   getAllElementsByClassName,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
 async function personalInjury() {
   const driver = await setupWebDriver();
@@ -125,7 +126,7 @@ async function personalInjury() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
     await driver.quit();
   }

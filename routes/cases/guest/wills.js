@@ -11,6 +11,7 @@ const {
   getElementByContentAndType,
   writeJsonObjectToFile,
   getElementByName,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
 const { By } = require("selenium-webdriver");
 async function wills() {
@@ -22,37 +23,26 @@ async function wills() {
   try {
     await driver.get(process.env.FRONT_URL);
     //get wills case
-    const willsDiv = await getDivByClassNameAndContent(
-      driver,
-      "popular_legal_searches_categories_services",
-      "Wills"
-    );
+    const willsDiv = await getElementById(driver, "Wills");
     //select wills case
     await willsDiv.click();
 
     //get finish button if exist
-    let isExist = await doesElementExist(
-      driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
-    );
+    let isExist = await doesElementExist(driver, "finish-button");
     //click on questions until finish button appear
     while (!isExist) {
       //get question
       const question = await getDivByClassName(driver, "questions_text");
       //select question
-      await question.click();
+      if (question) {
+        await question.click();
+      }
 
       //get finish button if exist
-      isExist = await doesElementExist(
-        driver,
-        "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
-      );
+      isExist = await doesElementExist(driver, "finish-button");
     }
     //get finish button
-    const finishButton = await getElementByClassName(
-      driver,
-      "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
-    );
+    const finishButton = await getElementById(driver, "finish-button");
     // click on finish buttom
     await finishButton.click();
     // check the url
@@ -62,10 +52,7 @@ async function wills() {
     // if everything is ok
     if (continiue) {
       //get lawyer button
-      const lawyerButton = await getElementByClassName(
-        driver,
-        "ant-btn ant-btn-primary sc-aXZVg fiYrTU"
-      );
+      const lawyerButton = await getElementById(driver, "continue-button-0");
       //click lawyer button
       await lawyerButton.click();
 
@@ -73,10 +60,7 @@ async function wills() {
       // get result of that check
       const ok = await waitForUrlAndCheck(driver, checkoutUrl);
       if (ok) {
-        const continiueButton = await getElementByClassName(
-          driver,
-          "ant-btn ant-btn-primary sc-aXZVg gZhPjw"
-        );
+        const continiueButton = await getElementById(driver, "continue-button");
         await continiueButton.click();
         const lastStep = await waitForUrlAndCheck(
           driver,
@@ -94,7 +78,7 @@ async function wills() {
           await passwordInput.sendKeys("P@ssword1");
           const nextButton = await getElementByClassName(
             driver,
-            "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
+            "ant-btn ant-btn-primary sc-aXZVg bITZdF"
           );
           await nextButton.click();
           const purches = await waitForUrlAndCheck(
@@ -142,7 +126,7 @@ async function wills() {
             }
             const purchesButton = await getElementByClassName(
               driver,
-              "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
+              "ant-btn ant-btn-primary sc-aXZVg cUULpq"
             );
             await purchesButton.click();
             const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
@@ -157,7 +141,7 @@ async function wills() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
     await driver.quit();
   }
