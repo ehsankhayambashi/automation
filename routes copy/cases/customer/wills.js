@@ -13,6 +13,7 @@ const {
   getElementByName,
   getAllElementsByClassName,
   getAllDivByClassNameAndContent,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
 
 const { By, until } = require("selenium-webdriver");
@@ -40,7 +41,7 @@ async function wills() {
         driver,
         "ant-btn ant-btn-primary ant-btn-lg sc-aXZVg kkjWIo"
       );
-      await emailInput.sendKeys("qa-86f327e0@mailinator.com");
+      await emailInput.sendKeys("qa-afd8e840@mailinator.com");
       await passwordInput.sendKeys(process.env.PASSWORD);
       await signInButton.click();
       //get quote button
@@ -179,7 +180,7 @@ async function wills() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
     await driver.quit();
   }

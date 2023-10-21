@@ -36,18 +36,18 @@ const realEstateAsCustomer = require("./routes/cases/customer/realState");
 const personalInjuryAsCustomer = require("./routes/cases/customer/personalInjury");
 
 async function runAutomation() {
-  await customerFullAuth();
-  await lawyerFullAuth();
-  await partnerFullAuth();
-  await firmFullAuth();
-  await signInFirmsLawyer();
-  await signInPartnersLawyer();
-  await forgotPassword("qa-7c4715d0@mailinator.com");
-  await willsAsGuest();
-  await realEstateAsGuest();
-  await personalInjuryAsGuest();
+  // await customerFullAuth();
+  // await lawyerFullAuth();
+  // await partnerFullAuth();
+  // await firmFullAuth();
+  // await signInFirmsLawyer();
+  // await signInPartnersLawyer();
+  // await forgotPassword("qa-7c4715d0@mailinator.com");
+  // await willsAsGuest();
+  // await realEstateAsGuest();
+  // await personalInjuryAsGuest();
   await willsAsCustomer();
-  await realEstateAsCustomer();
-  await personalInjuryAsCustomer();
+  // await realEstateAsCustomer();
+  // await personalInjuryAsCustomer();
 }
 runAutomation();

@@ -12,19 +12,16 @@ const {
   writeJsonObjectToFile,
   getElementByName,
   getAllElementsByClassName,
-  getAllDivByClassNameAndContent,
+  writeObjectToCsv,
 } = require("../../../utils/utils");
-
-const { By, until } = require("selenium-webdriver");
-async function wills() {
+async function realState() {
   const driver = await setupWebDriver();
   let log = {
-    test: "buy a case (wills) as customer",
+    test: "buy a case (real state) as customer",
     result: "failed",
   };
   try {
     await driver.get(process.env.FRONT_URL);
-
     //get login button
     const loginButton = await getElementByClassName(driver, "sc-jXbUNg kLdRob");
     await loginButton.click();
@@ -40,10 +37,9 @@ async function wills() {
         driver,
         "ant-btn ant-btn-primary ant-btn-lg sc-aXZVg kkjWIo"
       );
-      await emailInput.sendKeys("qa-86f327e0@mailinator.com");
+      await emailInput.sendKeys("qa-afd8e840@mailinator.com");
       await passwordInput.sendKeys(process.env.PASSWORD);
       await signInButton.click();
-      //get quote button
       const dashboard = await waitForUrlAndCheck(
         driver,
         `${process.env.FRONT_URL}/dashboard`
@@ -54,26 +50,24 @@ async function wills() {
           "ant-btn ant-btn-outline sc-aXZVg fiudgN"
         );
         await quoteButtons[1].click();
-        const willsDiv = await getDivByClassNameAndContent(
+        await driver.sleep(3000);
+        const realEstate = await getDivByClassNameAndContent(
           driver,
           "ant-typography sc-dAlyuH eSuIwr category_item",
-          "Wills"
+          "Real Estate"
         );
+        await realEstate.click();
         await driver.sleep(3000);
-        await willsDiv.click();
-        const willsTitle = await getDivByClassNameAndContent(
+        const realEstateTitle = await getDivByClassNameAndContent(
           driver,
           "ant-typography sc-dAlyuH cqzdcu service_item",
-          "Wills"
+          "Buying a Home1"
         );
-        await driver.sleep(3000);
-        await willsTitle.click();
-        //get finish button if exist
+        await realEstateTitle.click();
         let isExist = await doesElementExist(
           driver,
           "ant-btn ant-btn-primary sc-aXZVg cbyKUP"
         );
-        //click on questions until finish button appear
         await driver.sleep(3000);
         while (!isExist) {
           //get question
@@ -100,15 +94,13 @@ async function wills() {
         const continiue = await waitForUrlAndCheck(driver, expectedUrl);
         // if everything is ok
         if (continiue) {
-          //get lawyer button
+          await driver.sleep(1500);
           const lawyerButton = await getElementByClassName(
             driver,
             "ant-btn ant-btn-primary sc-aXZVg fiYrTU"
           );
-          //click lawyer button
           await lawyerButton.click();
           const checkoutUrl = `${process.env.FRONT_URL}/relevant-lawyers/customize-package`;
-          // get result of that check
           const ok = await waitForUrlAndCheck(driver, checkoutUrl);
           if (ok) {
             const continiueButton = await getElementByClassName(
@@ -121,56 +113,17 @@ async function wills() {
               `${process.env.FRONT_URL}/relevant-lawyers/customize-package/purchase-package`
             );
             if (purchesPage) {
-              await driver.sleep(5000); // Wait for 5 seconds
-              const isCardExist = await doesElementExist(
-                driver,
-                "ant-radio-input"
-              );
-              if (!isCardExist) {
-                const cartIframe = await driver.findElement(
-                  By.css('iframe[title="Secure card number input frame"]')
-                );
-                await driver.switchTo().frame(cartIframe);
-                const cartNumber = await getElementByName(driver, "cardnumber");
-                await cartNumber.sendKeys("4242424242424242");
-                await driver.switchTo().defaultContent();
-
-                const expirationIframe = await driver.findElement(
-                  By.css('iframe[title="Secure expiration date input frame"]')
-                );
-                await driver.switchTo().frame(expirationIframe);
-                const cartExpiration = await getElementByName(
-                  driver,
-                  "exp-date"
-                );
-                await cartExpiration.sendKeys("0624");
-                await driver.switchTo().defaultContent();
-
-                const cvcIframe = await driver.findElement(
-                  By.css('iframe[title="Secure CVC input frame"]')
-                );
-                await driver.switchTo().frame(cvcIframe);
-                const cartCvc = await getElementByName(driver, "cvc");
-                await cartCvc.sendKeys("740");
-                await driver.switchTo().defaultContent();
-
-                const addButtonCart = await getElementByClassName(
-                  driver,
-                  "ant-btn ant-btn-grey sc-aXZVg hhvzpH"
-                );
-                await addButtonCart.click();
-                await driver.sleep(9000);
-              }
+              await driver.sleep(3000); // Wait for 3 seconds
               const purchesButton = await getElementByClassName(
                 driver,
-                "ant-btn ant-btn-primary sc-aXZVg icsNxQ"
+                "ant-btn ant-btn-primary sc-aXZVg cRDJgE"
               );
               await purchesButton.click();
               const doneUrl = `${process.env.FRONT_URL}/purchase-success`;
               const done = await waitForUrlAndCheck(driver, doneUrl);
               if (done) {
                 log = {
-                  test: "buy a case (wills) as customer",
+                  test: "buy a case (real estate) as customer",
                   result: "successful",
                 };
               }
@@ -179,10 +132,10 @@ async function wills() {
         }
       }
     }
-    writeJsonObjectToFile("log.txt", log);
+    writeObjectToCsv("log.csv", log);
   } finally {
     await driver.quit();
   }
 }
-module.exports = wills;
-// wills();
+module.exports = realState;
+// realState();
